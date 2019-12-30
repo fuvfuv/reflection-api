@@ -1,0 +1,15 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  outline: none;
+}
+
+body {
+  background-color: #6a809e;
+  font-family: "Helvetica", "Arial", sans-serif;
+}
