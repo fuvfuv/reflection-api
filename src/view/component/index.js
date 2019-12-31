@@ -17,6 +17,10 @@ class Component {
     throw new Error(`You have to define template.`);
   }
 
+  isFunction(callBack) {
+    return typeof callBack === `function` && callBack();
+  }
+
   _createElement(template) {
     const newElement = document.createElement(`template`);
     newElement.innerHTML = template;

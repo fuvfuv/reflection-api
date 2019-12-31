@@ -6,33 +6,43 @@ import PopupForm from './view/popupForm';
 const api = new ApiClient();
 const itemsContainer = document.querySelector(`.list`);
 
+const updateData = (item, newData, itemComponent) => {
+  item = Object.assign(item, newData);
+
+  console.log(item);
+  // requestToUpdateItem({id: item.id, data: item});
+  // itemComponent.update(newData);
+};
+
 const renderItems = (items) => {
   itemsContainer.innerHTML = ``;
 
   for (let item of items) {
     const itemComponent = new Entity(item);
+    const popupFormComponent = new PopupForm(item);
     itemsContainer.appendChild(itemComponent.render());
 
-    itemComponent.onBtnUpdate = () => {
-      console.log(`Update item`);
+    itemComponent.onBtnEdit = () => {
+      // console.log(`Update item`);
+
+      itemsContainer.appendChild(popupFormComponent.render());
     };
 
-    itemComponent.onBtnDelete = () => {
-      console.log(`Delete item`);
+    itemComponent.onBtnDelete = (id) => {
+      // console.log(`Delete item, ${id}`);
+      requestToDeleteItem(id);
     };
 
     // временно
-    const popupFormComponent = new PopupForm(items[0]);
-    itemsContainer.appendChild(popupFormComponent.render());
 
-    popupFormComponent.onBtnSave = () => {
-      console.log(`Save form data`);
+    popupFormComponent.onBtnSave = (newData) => {
+      updateData(item, newData);
     };
 
     popupFormComponent.onBtnClose = () => {
-      console.log(`Close popup`);
+      // console.log(`Close popup`);
+      popupFormComponent.unrender();
     };
-    //
   }
 };
 

@@ -3,9 +3,9 @@ import Component from './component';
 class PopupForm extends Component {
   constructor(data) {
     super();
-    // this._name = data.success;
-    // this._email = data.lowPoint;
-    // this._jobPosition = data.takeAway;
+    this._name = data.success;
+    this._email = data.lowPoint;
+    this._jobPosition = data.takeAway;
 
     this._onBtnSaveClick = this._onBtnSaveClick.bind(this);
     this._onBtnCloseClick = this._onBtnCloseClick.bind(this);
@@ -33,15 +33,15 @@ class PopupForm extends Component {
           <div class="modal-body">
             <div class="form-group">
               <label for="user-name">Name</label>
-              <input type="text" class="form-control" id="user-name" placeholder="name" />
+              <input type="text" class="form-control" id="user-name" placeholder="name" value="${this._name}" />
             </div>
             <div class="form-group">
               <label for="user-email">Email</label>
-              <input type="text" class="form-control" id="user-email" placeholder="email" />
+              <input type="text" class="form-control" id="user-email" placeholder="email" value="${this._email}" />
             </div>
             <div class="form-group">
               <label for="user-job">Job-position</label>
-              <input type="text" class="form-control" id="user-job" placeholder="job-position" />
+              <input type="text" class="form-control" id="user-job" placeholder="job-position" value="${this._jobPosition}" />
             </div>
           </div>
           <div class="modal-footer">
@@ -53,12 +53,23 @@ class PopupForm extends Component {
     </div>`.trim();
   }
 
-  _onBtnSaveClick() {
-    return typeof this._onSave === `function` && this._onSave();
+  _processForm() {
+    return {
+      name: this._name,
+      email: this._email,
+      jobPosition: this._jobPosition
+    };
+  }
+
+  _onBtnSaveClick(e) {
+    e.preventDefault();
+
+    const newData = this._processForm();
+    this.isFunction(this._onSave(newData));
   }
 
   _onBtnCloseClick() {
-    return typeof this._onClose === `function` && this._onClose();
+    this.isFunction(this._onClose());
   }
 
   bind() {
