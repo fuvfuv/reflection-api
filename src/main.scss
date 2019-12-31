@@ -9,7 +9,41 @@ html {
   outline: none;
 }
 
-body {
+.header {
+  margin-bottom: 40px;
+  &-menu {
+    justify-content: flex-end;
+  }
+}
+
+.container {
+  max-width: 680px;
+}
+
+.list {
   margin: 0;
-  font-family: "Helvetica", "Arial", sans-serif;
+  padding: 0;
+}
+
+.field {
+  margin: 0;
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+
+.list-group-item {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.nav-item {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.modal.show-modal {
+  display: block;
 }

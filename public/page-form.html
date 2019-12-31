@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Awesome app</a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">List of items</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- main content -->
+    <main class="container">
+      <form class="form" action="#">
+        <fieldset>
+          <legend>New entity</legend>
+          <div class="form-group">
+            <label for="user-name">Name</label>
+            <input type="text" class="form-control" id="user-name" placeholder="Name" />
+          </div>
+          <div class="form-group">
+            <label for="user-age">Age</label>
+            <input type="text" class="form-control" id="user-age" placeholder="Age" />
+          </div>
+          <div class="form-group">
+            <label for="user-age">Email</label>
+            <input type="email" class="form-control" id="user-email" placeholder="Email" />
+          </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </main>
+  </body>
+</html>
