@@ -7,11 +7,9 @@ const api = new ApiClient();
 const itemsContainer = document.querySelector(`.list`);
 
 const updateData = (item, newData, itemComponent) => {
-  item = Object.assign(item, newData);
-
-  console.log(item);
-  // requestToUpdateItem({id: item.id, data: item});
-  // itemComponent.update(newData);
+  // item = Object.assign(item, newData);
+  requestToUpdateItem(item.id, newData);
+  itemComponent.update(newData);
 };
 
 const renderItems = (items) => {
@@ -24,7 +22,6 @@ const renderItems = (items) => {
 
     itemComponent.onBtnEdit = () => {
       // console.log(`Update item`);
-
       itemsContainer.appendChild(popupFormComponent.render());
     };
 
@@ -33,10 +30,8 @@ const renderItems = (items) => {
       requestToDeleteItem(id);
     };
 
-    // временно
-
     popupFormComponent.onBtnSave = (newData) => {
-      updateData(item, newData);
+      updateData(item, newData, itemComponent);
     };
 
     popupFormComponent.onBtnClose = () => {

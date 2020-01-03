@@ -53,11 +53,12 @@ class PopupForm extends Component {
     </div>`.trim();
   }
 
+
   _processForm() {
     return {
-      name: this._name,
-      email: this._email,
-      jobPosition: this._jobPosition
+      success: this.element.querySelector(`#user-name`).value,
+      lowPoint: this.element.querySelector(`#user-email`).value,
+      takeAway: this.element.querySelector(`#user-job`).value,
     };
   }
 
@@ -65,6 +66,8 @@ class PopupForm extends Component {
     e.preventDefault();
 
     const newData = this._processForm();
+    // console.log(newData);
+
     this.isFunction(this._onSave(newData));
   }
 

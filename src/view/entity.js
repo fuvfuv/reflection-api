@@ -35,10 +35,10 @@ class Entity extends Component {
     </li>`.trim();
   }
 
-  update(data) {
-    this._name = data.success;
-    this._email = data.lowPoint;
-    this._jobPosition = data.takeAway;
+  update(newData) {
+    this._name = newData.success;
+    this._email = newData.lowPoint;
+    this._jobPosition = newData.takeAway;
   }
 
   _onBtnEditClick() {
