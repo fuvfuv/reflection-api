@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Form</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -20,15 +20,19 @@
         </ul>
       </nav>
     </header>
-
     <!-- main content -->
     <main class="container">
-      <section class="users">
-        <div class="list-group-item list-group-item-action active">List of entities</div>
-        <ul class="list">
-          <!-- Место для айтемов -->
-        </ul>
-      </section>
+      <div class="card border-secondary mb-3">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Secondary card title</h4>
+          <p class="card-text field-1">1</p>
+          <p class="card-text field-2">2</p>
+          <p class="card-text field-3">3</p>
+        </div>
+      </div>
     </main>
+
+    <script type="text/javascript" src="bundle.js"></script>
   </body>
 </html>

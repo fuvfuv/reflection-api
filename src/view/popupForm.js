@@ -53,7 +53,6 @@ class PopupForm extends Component {
     </div>`.trim();
   }
 
-
   _processForm() {
     return {
       success: this.element.querySelector(`#user-name`).value,
@@ -66,7 +65,6 @@ class PopupForm extends Component {
     e.preventDefault();
 
     const newData = this._processForm();
-    // console.log(newData);
 
     this.isFunction(this._onSave(newData));
   }
