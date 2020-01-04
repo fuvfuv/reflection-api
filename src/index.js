@@ -1,4 +1,4 @@
-/* eslint-disabled */
+/* eslint-disable */
 import ListItem from './view/list-item';
 import PopupForm from './view/popupForm';
 import PageForm from './view/pageForm';
