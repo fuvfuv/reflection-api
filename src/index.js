@@ -1,17 +1,19 @@
-/* eslint-disable */
 import ListItem from './view/list-item';
 import PopupForm from './view/popupForm';
 import PageForm from './view/pageForm';
 import PageItem from './view/pageItem';
 
-import ApiClient from './data/http-client.js';
-
 // константы
 import {URL} from './constants';
 // утилиты
 import {redirectTo} from './utils';
+// запросы
+import {requestToCreateItem,
+  requestToUpdateItem,
+  requestToGetItem,
+  requestToGetItems,
+  requestToDeleteItem} from './data/requests';
 
-const api = new ApiClient();
 
 const itemsContainer = document.querySelector(`.list`);
 const newItemBtn = document.querySelector(`.nav-link-new-item`);
@@ -27,7 +29,7 @@ const onListOfItemsClick = () => {
 
 const updateData = (item, newData, itemComponent) => {
   item = Object.assign(item, newData);
-  requestToUpdateItem(item.id, newData);
+  requestToUpdateItem(item.id, newData, renderItems);
   itemComponent.update(newData);
 };
 
@@ -49,7 +51,7 @@ const renderItems = (items) => {
     };
 
     itemComponent.onBtnDelete = (id) => {
-      requestToDeleteItem(id);
+      requestToDeleteItem(id, renderItems);
     };
 
     popupFormComponent.onBtnSave = (newData) => {
@@ -89,56 +91,6 @@ const renderItemPage = () => {
     itemPage.render();
   });
 };
-
-// запрос на создание нового айтема
-async function requestToCreateItem(newData) {
-  try {
-    await api.createReflection(newData);
-  } catch (err) {
-    window.console.log(`Не удалось создать новую сущность`);
-  }
-}
-
-// запрос на обновление айтема
-async function requestToUpdateItem(id, newData) {
-  try {
-    await api.updateReflection(id, newData);
-    let items = await api.getReflections();
-    renderItems(items);
-  } catch (err) {
-    window.console.log(`Не удалось произвести запрос на обновление сущности`);
-  }
-}
-
-// // получение айтема по id
-async function requestToGetItem(id) {
-  try {
-    const item = await api.getReflection(id);
-    return item;
-  } catch (err) {
-    window.console.log(`Не удалось загрузить сущность по id`);
-  }
-}
-// получение всех айтемов
-async function requestToGetItems() {
-  try {
-    let items = await api.getReflections();
-    return items;
-  } catch (err) {
-    window.console.log(`Не удалось загрузить данные`);
-  }
-}
-
-// удаление айтема по id
-async function requestToDeleteItem(id) {
-  try {
-    await api.deleteReflection(id);
-    let items = await api.getReflections();
-    renderItems(items);
-  } catch (err) {
-    window.console.log(`Не удалось удалить сущность по id`);
-  }
-}
 
 newItemBtn.addEventListener(`click`, onNewItemClick);
 listOfItems.addEventListener(`click`, onListOfItemsClick);
