@@ -1,12 +1,20 @@
 import ApiClient from './http-client.js';
 const api = new ApiClient();
 
+// константы
+import {URL} from '../constants';
+// утилиты
+import {redirectTo} from '../utils';
+
 // запрос на создание нового айтема
-export async function requestToCreateItem(newData) {
+export async function requestToCreateItem(newData, pageForm) {
   try {
-    return await api.createReflection(newData);
+    pageForm.blockToSave();
+    await api.createReflection(newData);
+    redirectTo(URL.INDEX);
   } catch (err) {
     window.console.log(`Не удалось создать новую сущность`);
+    pageForm.unBlockToSave();
   }
 }
 

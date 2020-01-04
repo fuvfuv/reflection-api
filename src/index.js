@@ -72,12 +72,7 @@ const renderIndexPage = () => {
 const renderFormPage = () => {
   const pageForm = new PageForm();
   pageForm.onSubmit = (newData) => {
-    pageForm.blockToSave();
-    requestToCreateItem(newData).then(() => {
-      redirectTo(URL.INDEX);
-    }).catch(() => {
-      pageForm.unBlockToSave();
-    });
+    requestToCreateItem(newData, pageForm);
   };
 };
 
