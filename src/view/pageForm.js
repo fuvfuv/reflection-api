@@ -1,11 +1,8 @@
 export default class PageFrom {
   constructor() {
-    this._name = null;
-    this._email = null;
-    this._jobPosition = null;
-
     this._onSubmitBtnClick = this._onSubmitBtnClick.bind(this);
 
+    this.btnSubmit = document.querySelector(`.btn-submit`);
     this.bind();
   }
 
@@ -33,10 +30,10 @@ export default class PageFrom {
   }
 
   bind() {
-    document.querySelector(`.btn-submit`).addEventListener(`click`, this._onSubmitBtnClick);
+    this.btnSubmit.addEventListener(`click`, this._onSubmitBtnClick);
   }
 
   unbind() {
-    document.querySelector(`.btn-submit`).removeEventListener(`click`, this._onSubmitBtnClick);
+    this.btnSubmit.removeEventListener(`click`, this._onSubmitBtnClick);
   }
 }

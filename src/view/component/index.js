@@ -8,6 +8,7 @@ class Component {
   bind() {}
   unbind() {}
   update() {}
+  findElements() {}
 
   get element() {
     return this._element;
@@ -31,6 +32,7 @@ class Component {
   render() {
     this._docFragment = this._createElement(this.template);
     this._element = this._docFragment.children[0];
+    this.findElements();
     this.bind();
     return this._element;
   }

@@ -3,10 +3,12 @@ import Component from './component';
 export default class ListItem extends Component {
   constructor(data) {
     super();
-    this._id = data.id;
-    this._name = data.success;
-    this._email = data.lowPoint;
-    this._jobPosition = data.takeAway;
+    const {id, success, lowPoint, takeAway} = data;
+
+    this._id = id;
+    this._field = success;
+    this._lowField = lowPoint;
+    this._takeField = takeAway;
 
     this._onBtnOpenClick = this._onBtnOpenClick.bind(this);
     this._onBtnEditClick = this._onBtnEditClick.bind(this);
@@ -29,9 +31,9 @@ export default class ListItem extends Component {
     return `
     <li class="list-group-item">
       <div class="list-group-item-wrapper">
-        <p class="field field-name">Name: <span>${this._name}</span></p>
-        <p class="field field-email">Email: <span>${this._email}</span></p>
-        <p class="field field-job">Job-position: <span>${this._jobPosition}</span></p>
+        <p class="field field-name">Field 1: <span>${this._field}</span></p>
+        <p class="field field-email">Field 2: <span>${this._lowField}</span></p>
+        <p class="field field-job">Field 3: <span>${this._takeField}</span></p>
       </div>
       <div class="controls">
         <button type="button" class="btn btn-secondary btn-open">Open Item</button>
@@ -42,15 +44,15 @@ export default class ListItem extends Component {
   }
 
   _viewUpdate() {
-    this.element.querySelector(`.field-name span`).textContent = this._name;
-    this.element.querySelector(`.field-email span`).textContent = this._email;
-    this.element.querySelector(`.field-job span`).textContent = this._jobPosition;
+    this.element.querySelector(`.field-name span`).textContent = this._field;
+    this.element.querySelector(`.field-email span`).textContent = this._lowField;
+    this.element.querySelector(`.field-job span`).textContent = this._takeField;
   }
 
   update(newData) {
-    this._name = newData.success;
-    this._email = newData.lowPoint;
-    this._jobPosition = newData.takeAway;
+    this._filed = newData.success;
+    this._lowField = newData.lowPoint;
+    this._takeField = newData.takeAway;
     this._viewUpdate();
   }
 
@@ -66,15 +68,21 @@ export default class ListItem extends Component {
     this.isFunction(this._onDelete(this._id));
   }
 
+  findElements() {
+    this.btnOpen = this._element.querySelector(`.btn-open`);
+    this.btnEdit = this._element.querySelector(`.btn-edit`);
+    this.btnDelete = this._element.querySelector(`.btn-delete`);
+  }
+
   bind() {
-    this._element.querySelector(`.btn-open`).addEventListener(`click`, this._onBtnOpenClick);
-    this._element.querySelector(`.btn-edit`).addEventListener(`click`, this._onBtnEditClick);
-    this._element.querySelector(`.btn-delete`).addEventListener(`click`, this._onBtnDeleteClick);
+    this.btnOpen.addEventListener(`click`, this._onBtnOpenClick);
+    this.btnEdit.addEventListener(`click`, this._onBtnEditClick);
+    this.btnDelete.addEventListener(`click`, this._onBtnDeleteClick);
   }
 
   unbind() {
-    this._element.querySelector(`.btn-open`).removeEventListener(`click`, this._onBtnOpenClick);
-    this._element.querySelector(`.btn-edit`).removeEventListener(`click`, this._onBtnEditClick);
-    this._element.querySelector(`.btn-delete`).removeEventListener(`click`, this._onBtnDeleteClick);
+    this.btnOpen.removeEventListener(`click`, this._onBtnOpenClick);
+    this.btnEdit.removeEventListener(`click`, this._onBtnEditClick);
+    this.btnDelete.removeEventListener(`click`, this._onBtnDeleteClick);
   }
 }

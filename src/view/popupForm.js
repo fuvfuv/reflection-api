@@ -1,11 +1,16 @@
 import Component from './component';
 
-class PopupForm extends Component {
+export default class PopupForm extends Component {
   constructor(data) {
+    const {success, takeAway, lowPoint} = data;
     super();
-    this._name = data.success;
-    this._email = data.lowPoint;
-    this._jobPosition = data.takeAway;
+
+    this._field = success;
+    this._lowField = lowPoint;
+    this._takeField = takeAway;
+
+    this.btnSave = null;
+    this.closeBtns = null;
 
     this._onBtnSaveClick = this._onBtnSaveClick.bind(this);
     this._onBtnCloseClick = this._onBtnCloseClick.bind(this);
@@ -33,15 +38,15 @@ class PopupForm extends Component {
           <div class="modal-body">
             <div class="form-group">
               <label for="user-name">Name</label>
-              <input type="text" class="form-control" id="user-name" placeholder="name" value="${this._name}" />
+              <input type="text" class="form-control" id="user-name" placeholder="name" value="${this._field}" />
             </div>
             <div class="form-group">
               <label for="user-email">Email</label>
-              <input type="text" class="form-control" id="user-email" placeholder="email" value="${this._email}" />
+              <input type="text" class="form-control" id="user-email" placeholder="email" value="${this._lowField}" />
             </div>
             <div class="form-group">
               <label for="user-job">Job-position</label>
-              <input type="text" class="form-control" id="user-job" placeholder="job-position" value="${this._jobPosition}" />
+              <input type="text" class="form-control" id="user-job" placeholder="job-position" value="${this._takeField}" />
             </div>
           </div>
           <div class="modal-footer">
@@ -63,9 +68,7 @@ class PopupForm extends Component {
 
   _onBtnSaveClick(e) {
     e.preventDefault();
-
     const newData = this._processForm();
-
     this.isFunction(this._onSave(newData));
   }
 
@@ -73,9 +76,13 @@ class PopupForm extends Component {
     this.isFunction(this._onClose());
   }
 
-  bind() {
-    this._element.querySelector(`.btn-save`).addEventListener(`click`, this._onBtnSaveClick);
+  findElements() {
+    this.btnSave = this._element.querySelector(`.btn-save`);
     this.closeBtns = this._element.querySelectorAll(`.btn-close`);
+  }
+
+  bind() {
+    this.btnSave.addEventListener(`click`, this._onBtnSaveClick);
 
     this.closeBtns.forEach((it) => {
       it.addEventListener(`click`, this._onBtnCloseClick);
@@ -83,13 +90,10 @@ class PopupForm extends Component {
   }
 
   unbind() {
-    this._element.querySelector(`.btn-save`).removeEventListener(`click`, this._onBtnSaveClick);
-    this.closeBtns = this._element.querySelectorAll(`.btn-close`);
+    this.btnSave.removeEventListener(`click`, this._onBtnSaveClick);
 
     this.closeBtns.forEach((it) => {
       it.removeEventListener(`click`, this._onBtnCloseClick);
     });
   }
 }
-
-export default PopupForm;

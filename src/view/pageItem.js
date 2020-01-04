@@ -1,19 +1,23 @@
 export default class PageItem {
   constructor(data) {
-    const {name, email, jobPosition} = data;
+    const {success, takeAway, lowPoint} = data;
 
-    this._name = name;
-    this._email = email;
-    this._jobPosition = jobPosition;
+    this._name = success;
+    this._email = takeAway;
+    this._jobPosition = lowPoint;
+
+    this.listItemOne = document.querySelector(`.list-item-1 span`);
+    this.listItemTwo = document.querySelector(`.list-item-2 span`);
+    this.listItemThree = document.querySelector(`.list-item-3 span`);
   }
 
   set onSubmit(callBack) {
     this._onSubmit = callBack;
   }
 
-  viewRender() {
-    document.querySelector(`.field-1`).textContent = this._name;
-    document.querySelector(`.field-2`).textContent = this._emai;
-    document.querySelector(`.field-3`).textContent = this._jobPosition;
+  render() {
+    this.listItemOne.textContent = this._name;
+    this.listItemTwo.textContent = this._email;
+    this.listItemThree.textContent = this._jobPosition;
   }
 }
