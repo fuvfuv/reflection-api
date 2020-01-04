@@ -18,6 +18,16 @@ export default class PageFrom {
     };
   }
 
+  unBlockToSave() {
+    this.btnSubmit.disabled = false;
+    this.btnSubmit.textContent = `Submit`;
+  }
+
+  blockToSave() {
+    this.btnSubmit.disabled = true;
+    this.btnSubmit.textContent = `Adding...`;
+  }
+
   _onSubmitBtnClick(e) {
     e.preventDefault();
     const newData = this._processForm();

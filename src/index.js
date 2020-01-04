@@ -14,7 +14,6 @@ import {requestToCreateItem,
   requestToGetItems,
   requestToDeleteItem} from './data/requests';
 
-
 const itemsContainer = document.querySelector(`.list`);
 const newItemBtn = document.querySelector(`.nav-link-new-item`);
 const listOfItems = document.querySelector(`.nav-link-list`);
@@ -25,12 +24,6 @@ const onNewItemClick = () => {
 
 const onListOfItemsClick = () => {
   redirectTo(URL.INDEX);
-};
-
-const updateData = (item, newData, itemComponent) => {
-  item = Object.assign(item, newData);
-  requestToUpdateItem(item.id, newData, renderItems);
-  itemComponent.update(newData);
 };
 
 const renderItems = (items) => {
@@ -55,7 +48,8 @@ const renderItems = (items) => {
     };
 
     popupFormComponent.onBtnSave = (newData) => {
-      updateData(item, newData, itemComponent);
+      requestToUpdateItem(item.id, newData, renderItems);
+      itemComponent.update(newData);
       popupFormComponent.unrender();
     };
 
@@ -78,7 +72,12 @@ const renderIndexPage = () => {
 const renderFormPage = () => {
   const pageForm = new PageForm();
   pageForm.onSubmit = (newData) => {
-    requestToCreateItem(newData);
+    pageForm.blockToSave();
+    requestToCreateItem(newData).then(() => {
+      redirectTo(URL.INDEX);
+    }).catch(() => {
+      pageForm.unBlockToSave();
+    });
   };
 };
 

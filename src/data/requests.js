@@ -4,7 +4,7 @@ const api = new ApiClient();
 // запрос на создание нового айтема
 export async function requestToCreateItem(newData) {
   try {
-    await api.createReflection(newData);
+    return await api.createReflection(newData);
   } catch (err) {
     window.console.log(`Не удалось создать новую сущность`);
   }
