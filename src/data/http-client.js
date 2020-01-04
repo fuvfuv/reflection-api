@@ -24,6 +24,10 @@ export default class ApiClient {
     return this._load({url: `reflections/${id}`}).then(toJSON);
   }
 
+  deleteReflection(id) {
+    return this._load({url: `reflections/${id}`, method: METHOD.DELETE});
+  }
+
   createReflection(item) {
     return this._load({
       url: `reflections`,
@@ -31,10 +35,6 @@ export default class ApiClient {
       body: JSON.stringify(item),
       headers: new Headers({'Content-Type': `application/json`})
     }).then(toJSON);
-  }
-
-  deleteReflection(id) {
-    return this._load({url: `reflections/${id}`, method: METHOD.DELETE});
   }
 
   updateReflection(id, data) {
